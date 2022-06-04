@@ -11,8 +11,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(pdfRouters)
-app.use(tablesRouters)
+app.use(pdfRouters);
+app.use(tablesRouters);
 
 let port = process.env.PORT || 4000;
 app.listen(port, () => {
