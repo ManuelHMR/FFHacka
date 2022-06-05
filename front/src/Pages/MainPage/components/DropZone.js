@@ -36,23 +36,6 @@ export default function DropZone(props) {
       {file.path} - {file.size} bytes
     </li>
   ));
-  function postPdf() {
-    const data = new FormData();
-    data.append("name", "name");
-    data.append("pdf", file);
-    console.log(data);
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
-      },
-    };
-    axios
-      .post("https://httpbin.org/anything", data, config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  }
-
   return (
     <Section>
       <div {...getRootProps({ className: "dropzone", style: baseStyle })}>
@@ -70,7 +53,7 @@ export default function DropZone(props) {
 }
 const Section = styled.section`
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
   div {
     height: 150px;
     display: flex;

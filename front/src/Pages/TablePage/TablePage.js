@@ -1,9 +1,10 @@
 import Table from "./components/Table.js";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../userContext/userContext";
 import PostBox from "./components/PostBox.js";
+import Loading from "../../components/Loading.js";
 export default function TablePage() {
   const { dados, setDados } = useContext(UserContext);
   const { tableIndex } = useParams();
@@ -12,6 +13,14 @@ export default function TablePage() {
     return function _alteraDados(dadoNovo) {
       setDados((dados) => {
         dados[tableIndex].data[lin][col] = dadoNovo;
+        return [...dados];
+      });
+    };
+  }
+  function alteraHeaders(col) {
+    return function _alteraDados(dadoNovo) {
+      setDados((dados) => {
+        dados[tableIndex].headers[col] = dadoNovo;
         return [...dados];
       });
     };
@@ -33,6 +42,9 @@ export default function TablePage() {
     };
   }
 
+  if (dados === undefined) {
+    return <Loading></Loading>;
+  }
   return (
     <Container>
       <PostBox
@@ -40,7 +52,12 @@ export default function TablePage() {
         alteraTitle={alteraTitle(tableIndex)}
         alteraIsSelected={alteraIsSelected(tableIndex)}
       />
-      <Table alteraData={alteraData} dados={dados[tableIndex].data} />
+      <Table
+        alteraData={alteraData}
+        alteraHeaders={alteraHeaders}
+        dados={dados[tableIndex]?.data}
+        headers={dados[tableIndex]?.headers}
+      />
     </Container>
   );
 }

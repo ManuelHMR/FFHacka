@@ -5,18 +5,32 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../userContext/userContext";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
+import axios from "axios";
 export default function PostPage() {
-  const { dados } = useContext(UserContext);
-  const [isSent, setIsSent] = useState(true);
+  const { dados, URL } = useContext(UserContext);
+  const [isSent, setIsSent] = useState(false);
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState(false);
   function postFinalData() {
     if (isSent) {
+      setIsSent(false);
       navigate("/");
       return;
     }
+    setIsloading(true);
     const body = dados.filter((item) => item.isSelected === true);
-    console.log(body);
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
+    axios
+      .post(`${URL}/tables`, body, config)
+      .then(() => {
+        setIsSent(true);
+        setIsloading(false);
+      })
+      .catch((err) => console.log(body, err));
   }
   if (isLoading) {
     return (

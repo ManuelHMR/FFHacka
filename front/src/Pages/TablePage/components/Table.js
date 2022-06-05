@@ -1,13 +1,16 @@
 import React from "react";
 import Td from "./Td.js";
+import Th from "./Th.js";
 import styled from "styled-components";
-export default function Table({ dados, alteraData }) {
+export default function Table({ dados, alteraData, alteraHeaders, headers }) {
   return (
     <TableWrapper>
       <thead>
         <tr>
-          {Object.keys(dados[0]).map((item, i) => (
-            <th key={i}>{item}</th>
+          {headers.map((item, i) => (
+            <Th alteraData={alteraHeaders(i)} key={i}>
+              {item}
+            </Th>
           ))}
         </tr>
       </thead>
@@ -38,7 +41,9 @@ const TableWrapper = styled.table`
   th {
     font-size: 20px;
     font-weight: 700;
-    padding: 15px;
+  }
+  th textarea {
+    background-color: #f2f2f2;
   }
 
   input {

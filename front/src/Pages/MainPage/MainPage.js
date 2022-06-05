@@ -8,23 +8,9 @@ import axios from "axios";
 import Loading from "../../components/Loading";
 
 export default function MainPage() {
-  const { URL, file } = useContext(UserContext);
+  const { URL, file, setDados } = useContext(UserContext);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  function teste(pdf) {
-    console.log(pdf, "entrei");
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
-      },
-    };
-    console.log(pdf, "o que sou");
-    axios
-      .post(`${URL}/pdf`, pdf, config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  }
 
   const [name, setName] = useState();
 
@@ -36,7 +22,7 @@ export default function MainPage() {
     axios
       .post(`${URL}/pdf`, data)
       .then((res) => {
-        console.log(res);
+        setDados(res.data);
         setIsLoading(false);
         navigate("/tabela/0");
       })
