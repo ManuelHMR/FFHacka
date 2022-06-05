@@ -1,11 +1,12 @@
-// import connectionMongo from "../dbMongo.js";
-// const pdfCollection = connectionMongo.collection("pdf");
+import connectionMongo from "../dbMongo.js";
+const pdfCollection = connectionMongo.collection("pdf");
 import dotenv from "dotenv";
 import axios from "axios";
 dotenv.config();
 
 export async function postPdf(req, res) {
   try {
+    pdfCollection.insertOne({pdf:  req.file.buffer});
     // Send to FLASK
     const pdf = req.file.buffer;
     const url = `${process.env.FLASK_URL}/pdf`;
@@ -54,4 +55,4 @@ export async function postPdf(req, res) {
   } catch (e) {
     res.send("Erro ao salvar pdf no banco de dados");
   }
-}
+};
