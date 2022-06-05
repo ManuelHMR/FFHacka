@@ -31,7 +31,7 @@ export default function MainPage() {
     data.append("pdf", file);
     console.log(data);
     axios
-      .post("https://httpbin.org/anything", data)
+      .post(`${URL}/pdf`, data)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   }
