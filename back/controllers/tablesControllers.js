@@ -1,5 +1,4 @@
 import tableBuild from "../services/tableBuild.js";
-import insertTable from "../services/insertTable.js";
 
 export async function postTables(req, res) {
   const tablesArr = req.body;
