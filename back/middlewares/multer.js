@@ -1,4 +1,4 @@
 import multer from "multer";
 
-const upload = multer({ dest: "uploads/" });
+const upload = multer();
 export default upload;

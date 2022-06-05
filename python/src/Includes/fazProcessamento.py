@@ -1,11 +1,13 @@
 import camelot
-from Includes.processaTabela import ProcessaTabela
+from .processaTabela import ProcessaTabela
 
 def fazProcessamento(pdf):
     """ Recebe um pdf e retorna as tabelas encontradas, num array de tabelas
     """
     candidateTables = camelot.read_pdf(pdf, flavor='stream', pages='all', flag_size=True)
 
+    if len(candidateTables) == 0:
+        return None
     # Removendo "tabelas" desnecessarias
     newTables = []
 
@@ -27,6 +29,8 @@ def fazProcessamento(pdf):
 
     candidateTables = newTables
 
+    if len(candidateTables) == 0:
+        return None
 
     # Faz o processamento das tabelas
     newTables = []
@@ -41,4 +45,7 @@ def fazProcessamento(pdf):
         novaTbl.df = processaTabela.df
         newTables.append(novaTbl)
 
+    if len(candidateTables) == 0:
+        return None
+        
     return newTables
