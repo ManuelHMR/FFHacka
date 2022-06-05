@@ -1,7 +1,7 @@
 import React from "react";
 import Td from "./Td.js";
 import styled from "styled-components";
-export default function Table({ dados, alteraDados }) {
+export default function Table({ dados, alteraData }) {
   return (
     <TableWrapper>
       <thead>
@@ -15,7 +15,7 @@ export default function Table({ dados, alteraDados }) {
         {dados.map((item, index) => (
           <tr key={index}>
             {Object.keys(dados[index]).map((key, i) => (
-              <Td key={i} alteraDados={alteraDados(index, key)}>
+              <Td key={i} alteraData={alteraData(index, key)}>
                 {item[key]}
               </Td>
             ))}
@@ -33,6 +33,7 @@ const TableWrapper = styled.table`
   th,
   td {
     border: 1px solid black;
+    word-break: break-all;
   }
   th {
     font-size: 20px;
@@ -41,11 +42,13 @@ const TableWrapper = styled.table`
   }
 
   input {
+    max-width: 300px;
     padding: 15px;
     background-color: #ffffff;
     border: 1px solid #d4d4d4;
     width: 100%;
     border-radius: 5px;
     font-size: 20px;
+    word-break: break-all;
   }
 `;
