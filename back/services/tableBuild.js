@@ -8,6 +8,5 @@ export default function tableBuild(table) {
       query += `,"${headers[i]}" TEXT NOT NULL`;
     }
     query += ");";
-    console.log(query);
     connectionSQL.query(query);
 };  
