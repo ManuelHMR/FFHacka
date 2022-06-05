@@ -8,6 +8,8 @@ tabula-py = "*"
 camelot-py = "*"
 opencv-python = "*"
 ghostscript = "*"
+flask = "*"
+gunicorn = "*"
 
 [dev-packages]
 ipykernel = "*"
