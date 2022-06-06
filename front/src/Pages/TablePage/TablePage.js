@@ -47,6 +47,12 @@ export default function TablePage() {
   }
   return (
     <Container>
+      <PageFinder>
+        <h1>
+          Tabela presente na página {dados[tableIndex].page} do documento
+          enviado
+        </h1>
+      </PageFinder>
       <PostBox
         tableIndex={tableIndex}
         alteraTitle={alteraTitle(tableIndex)}
@@ -61,7 +67,6 @@ export default function TablePage() {
     </Container>
   );
 }
-
 const Container = styled.div`
   height: 100vh;
   width: 100%;
@@ -88,12 +93,11 @@ const Container = styled.div`
     overflow-y: scroll;
   }
 `;
-
-const ButtonBox = styled.div`
-  display: flex;
-  color: #ffffff;
-  width: 100%;
-  max-width: 1100px;
-  column-gap: 20px;
-  justify-content: space-between;
+const PageFinder = styled.div`
+  margin-bottom: 20px;
+  h1 {
+    font-size: 30px;
+    color: #063970;
+    font-weight: 700;
+  }
 `;
